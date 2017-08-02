@@ -1,7 +1,6 @@
-module.export = {
-data: function(){
-    return {
-    text: "Hello World!"
-    };
-}
-};
+new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue.js!'
+  }
+})
