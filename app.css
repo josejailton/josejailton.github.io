@@ -1,0 +1,20 @@
+.card-deck{
+	margin: 1rem;
+}
+.card-img-top{
+	width:220px;
+	margin-top: 2rem;
+
+}
+.card-title{
+	text-align: center;
+}
+.del_user_localstorage{
+	padding-left: 1rem;
+	padding-right: 1rem;
+	
+	font-size: 38px !important;
+}
+.card-footer{
+	padding-right: 0.1rem;
+}
