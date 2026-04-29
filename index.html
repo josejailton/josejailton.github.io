@@ -1,38 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="robots" content="noindex, nofollow">
-
-    <title>J</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-    <style type="text/css">
-    
-    </style>
-    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-</head>
+<html>
 <body>
-<div class="container">
-<br>
-    <div class="row">
-    	<div class="span3 well" style="position: absolute;left: 50%;margin-left: -100px;">
-        <center>
-        <a href="#aboutModal" data-toggle="modal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
-         <h3>Joe Sixpack</h3>
-	</center>     
-        </div>
-    </div>
-    <div class="row">
-    	<div class="span3 well" style="position: absolute;left: 50%;margin-left: -100px;">
-        <center>
-        <a href="#aboutModal" data-toggle="modal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
-         <h3>Joe Sixpack</h3>
-	</center>
-        </div>
-     </div>
-	<img src="images/caixa-economica-federal-logo.png" width="140" height="140">
-</div>	
+
+<h1>Monitor ESP32</h1>
+
+<p>Temperatura: <span id="temp">--</span> °C</p>
+<p>Umidade: <span id="hum">--</span> %</p>
+
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+<script>
+const client = mqtt.connect("wss://broker.hivemq.com:8884/mqtt");
+
+client.on("connect", () => {
+  client.subscribe("esp32/quarto00188/sensor");
+});
+
+client.on("message", (topic, message) => {
+  const data = JSON.parse(message.toString());
+
+  document.getElementById("temp").innerText = data.temp;
+  document.getElementById("hum").innerText = data.hum;
+});
+</script>
+
 </body>
 </html>
